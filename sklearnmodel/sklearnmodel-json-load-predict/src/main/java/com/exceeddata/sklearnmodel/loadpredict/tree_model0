@@ -1,0 +1,177 @@
+{
+  "meta": "decision-tree",
+  "feature_importances_": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.4322431445307723,
+    0.0,
+    0.0,
+    0.3871597197786379,
+    0.0,
+    0.0,
+    0.18059713569058988
+  ],
+  "max_features_": 13,
+
+  "n_classes_": 3,
+  "n_features_": 13,
+  "n_outputs_": 1,
+
+
+  "tree_": {
+    "max_depth": 3,
+    "node_count": 7,
+    "nodes": [
+      [
+        1, // leftchild index, 0-based index
+        2, // rightchild index
+        9, // index of feature
+        3.649999976158142, // feature threshold
+        0.6619406867845994, // gini
+        124, // #samples
+        124.0
+      ],
+      [
+        -1, // index=-1, leaf。leaf的下个elem是 its father.rightchild
+        -1,
+        -2,
+        -2.0,
+        0.0,
+        38,
+        38.0
+      ],
+      [
+        3, // left child
+        4, // right child
+        6, // feature
+        1.399999976158142, // threshold
+        0.5849107625743646, // impurity
+        86, // n_node samples
+        86.0 // weighted n nodes samples
+      ],
+      [
+        -1,
+        -1,
+        -2,
+        -2.0,
+        0.0,
+        35,
+        35.0
+      ],
+      [
+        5,
+        6,
+        12,
+        706.5,
+        0.2906574394463668,
+        51,
+        51.0
+      ],
+      [
+        -1,
+        -1,
+        -2,
+        -2.0,
+        0.0,
+        9,
+        9.0
+      ],
+      [
+        -1,
+        -1,
+        -2,
+        -2.0,
+        0.0,
+        42,
+        42.0
+      ]
+    ],
+    "values": [
+      [
+        [ // values里第一个元素的第一个元素：这个list
+          42.0, // #samples of class_0
+          47.0, // # class_1
+          35.0 // # class_2
+          // 每个node都有一个predict值。由 最大的# 确定
+        ]
+      ],
+      [
+        [
+          0.0,
+          38.0,
+          0.0
+        ]
+      ],
+      [
+        [
+          42.0,
+          9.0,
+          35.0
+        ]
+      ],
+      [
+        [
+          0.0,
+          0.0,
+          35.0
+        ]
+      ],
+      [
+        [
+          42.0,
+          9.0,
+          0.0
+        ]
+      ],
+      [
+        [
+          0.0,
+          9.0,
+          0.0
+        ]
+      ],
+      [
+        [
+          42.0,
+          0.0,
+          0.0
+        ]
+      ]
+    ],
+    "nodes_dtype": [
+      "<i8",
+      "<i8",
+      "<i8",
+      "<f8",
+      "<f8",
+      "<i8",
+      "<f8"
+    ]
+  },
+
+  "classes_": [
+    0,
+    1,
+    2
+  ],
+  "params": {
+    "ccp_alpha": 0.0,
+    "class_weight": null,
+    "criterion": "gini",
+    "max_depth": 5,
+    "max_features": null,
+    "max_leaf_nodes": null,
+    "min_impurity_decrease": 0.0,
+    "min_impurity_split": null,
+    "min_samples_leaf": 5,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "presort": "deprecated",
+    "random_state": 0,
+    "splitter": "best"
+  }
+}
