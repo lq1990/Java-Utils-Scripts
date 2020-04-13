@@ -29,7 +29,7 @@ class CSVFixTime {
             while(csvReader.readRecord()) {
                 String[] line = csvReader.getValues();
 
-                // 处理line[1] 即时间
+                // 处理line[1] 即时间。此处解析的问题：会把headers错过
 //                try {
 //
 //                    Date parse = sdf1.parse(line[1]);
