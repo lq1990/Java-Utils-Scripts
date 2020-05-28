@@ -1,2 +1,3 @@
 test in feature_x
 test merge
+test merge2
