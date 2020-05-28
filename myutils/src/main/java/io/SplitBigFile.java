@@ -27,10 +27,13 @@ public class SplitBigFile {
     public static void main(String[] args) throws IOException {
         SplitBigFile s = new SplitBigFile();
 
-        s.splitByChannel("C:\\Users\\liuqi\\exceeddata\\A资源配置任务\\srcData\\ecommerce-behavior\\ecommerce-behavior-data-from-multi-category-store\\2019-Oct.csv",
-                27,
-                "C:\\Users\\liuqi\\exceeddata\\A资源配置任务\\srcData\\ecommerce-behavior\\ecommerce-behavior-data-from-multi-category-store\\split_200MB\\");
+        String src1 = "E:\\pressureTestData\\ecommerce-behavior\\ecommerce-behavior-data-from-multi-category-store\\2019-Oct.csv";
+        String dest1 = "E:\\pressureTestData\\ecommerce-behavior\\ecommerce-behavior-data-from-multi-category-store\\split_20MB\\";
 
+        String src = "C:\\Users\\liuqi\\exceeddata\\ADataMiningTask\\src\\ev.csv";
+        String dest = "C:\\Users\\liuqi\\exceeddata\\ADataMiningTask\\src\\split_ev_100mb\\";
+
+        s.splitByChannel(src, 10, dest);
 
     }
 
@@ -86,7 +89,7 @@ public class SplitBigFile {
         List<File> result = new ArrayList<File>();
         List<Point> list = blocking(new File(file), piece);
         for (int i = 0; i < list.size(); i++) {
-            File outputFile = new File(outputDirectiry + "ecom_200mb_" + i + ".csv");
+            File outputFile = new File(outputDirectiry + "ev_100mb_" + i + ".csv");
             FileChannel in = new FileInputStream(file).getChannel();
             FileChannel out = new FileOutputStream(outputFile).getChannel();
             ByteBuffer buffer = ByteBuffer.allocate(list.get(i).getLength());
