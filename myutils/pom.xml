@@ -24,6 +24,7 @@
 
     <dependencies>
 
+
         <!-- 1.6 ~ 2.2 M -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -55,6 +56,14 @@
             <artifactId>exceeddata-commons</artifactId>
             <version>${exceeddata.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+        </dependency>
+
+
 
         <!-- Spark core -->
         <dependency>
@@ -141,7 +150,6 @@
             <artifactId>google-collections</artifactId>
             <version>1.0</version>
         </dependency>
-
 
 
     </dependencies>
