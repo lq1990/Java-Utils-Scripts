@@ -8,7 +8,54 @@
     <artifactId>myutils</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <maven.compiler.version>3.8.1</maven.compiler.version>
+        <maven.assembly.version>2.6</maven.assembly.version>
+        <maven.surefire.version>2.19.1</maven.surefire.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <library.ext.directory>package</library.ext.directory>
+        <exceeddata.version>4.0.0</exceeddata.version>
+        <kryo.version>3.0.3</kryo.version>
+        <hadoop.version>2.7.4</hadoop.version>
+    </properties>
+
+
     <dependencies>
+
+        <!-- 1.6 ~ 2.2 M -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+
+        <!-- 202 + 337 =539 K -->
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>ejml-core</artifactId>
+            <version>0.39</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>ejml-ddense</artifactId>
+            <version>0.39</version>
+        </dependency>
+
+        <!-- 1.4 M -->
+        <dependency>
+            <groupId>org.ujmp</groupId>
+            <artifactId>ujmp-core</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.exceeddata.ac</groupId>
+            <artifactId>exceeddata-commons</artifactId>
+            <version>${exceeddata.version}</version>
+        </dependency>
+
         <!-- Spark core -->
         <dependency>
             <groupId>org.apache.spark</groupId>

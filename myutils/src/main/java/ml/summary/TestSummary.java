@@ -1,4 +1,4 @@
-package ml.minmaxscale;
+package ml.summary;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
