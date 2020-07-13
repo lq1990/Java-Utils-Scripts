@@ -77,7 +77,7 @@ def computeInverse(X: RowMatrix): DenseMatrix = {
         // create the inv diag matrix from S
         double[] array0 = svd.s().toArray();
         double[] array = new double[array0.length];
-        for(int i=0; i<array0.length; ++i) {
+        for (int i = 0; i < array0.length; ++i) {
             array[i] = Math.pow(array0[i], -1);
         }
         DenseMatrix invS = DenseMatrix.diag(new DenseVector(array));
@@ -99,9 +99,9 @@ def computeInverse(X: RowMatrix): DenseMatrix = {
         final int nRows = (int) svd.U().numRows();
         final int nCols = (int) svd.U().numCols();
         double[] Uarray = new double[nRows * nCoef];
-        for (int i=0, len = collect.size(); i<len;++i) {
+        for (int i = 0, len = collect.size(); i < len; ++i) {
             double[] doubles = collect.get(i);
-            System.arraycopy(doubles, 0, Uarray, i*len, len);
+            System.arraycopy(doubles, 0, Uarray, i * len, len);
         }
 
         DenseMatrix U = new DenseMatrix(nRows, nCols, Uarray); // row/col major ???
@@ -118,9 +118,9 @@ def computeInverse(X: RowMatrix): DenseMatrix = {
         SQLContext sqlContext = new SQLContext(sc);
 
         List<Row> data = Arrays.asList(
-                RowFactory.create(0, Vectors.dense(1.0, 2d,1d)),
-                RowFactory.create(1, Vectors.dense(3.0, 4d,5d)),
-                RowFactory.create(2, Vectors.dense(5d,6d, 7d))
+                RowFactory.create(0, Vectors.dense(1.0, 2d, 1d)),
+                RowFactory.create(1, Vectors.dense(3.0, 4d, 5d)),
+                RowFactory.create(2, Vectors.dense(5d, 6d, 7d))
         );
         StructType schema = new StructType(new StructField[]{
                 new StructField("id", DataTypes.IntegerType, false, Metadata.empty()),
@@ -148,11 +148,11 @@ def computeInverse(X: RowMatrix): DenseMatrix = {
         System.out.println(Arrays.toString(denseMatrix.toArray())); // array is in col-major order
     }
 
-    public static void testCalcUsingRowMatrix_Matrix(JavaSparkContext sc ) throws EngineException {
+    public static void testCalcUsingRowMatrix_Matrix(JavaSparkContext sc) throws EngineException {
         // to Matrix
-        Matrix Pmat = new DenseMatrix(2,2, new double[]{1.1, 2.1, 1.2, 2.2}); // Note: colmajor
-        Matrix Hmat = new DenseMatrix(2,2, new double[]{1, 2, 3, 4}); // Note: colmajor
-        Matrix Rmat = new DenseMatrix(2,2, new double[]{1, 2, 5,6}); // Note: colmajor
+        DenseMatrix Pmat = new DenseMatrix(2, 2, new double[]{1.1, 2.1, 1.2, 2.2}); // Note: colmajor
+        DenseMatrix Hmat = new DenseMatrix(2, 2, new double[]{1, 2, 3, 4}); // Note: colmajor
+        DenseMatrix Rmat = new DenseMatrix(2, 2, new double[]{1, 2, 5, 6}); // Note: colmajor
 
         // to List<Vector>  // to JavaRDD // to RowMatrix
 //        List<Vector> listP = new ArrayList<>();
@@ -180,7 +180,6 @@ def computeInverse(X: RowMatrix): DenseMatrix = {
 //        RowMatrix Rrowmat = new RowMatrix(Rrdd.rdd());
 
 
-
         // + - * inv T, all use RowMatrix/ Matrxi
 
         RowMatrix P = matrix2RowMatrix(sc, Pmat);
@@ -190,11 +189,35 @@ def computeInverse(X: RowMatrix): DenseMatrix = {
         DenseMatrix denseMatrix = computeInv(P);
         System.out.println(Arrays.toString(denseMatrix.toArray()));
 
+        DenseMatrix inner =
+                        plus(
+                                Hmat.multiply(Pmat).multiply(Hmat.transpose()), Rmat
+                        );
+
+        DenseMatrix multiply = Pmat.multiply(Hmat.transpose()).multiply(computeInv(matrix2RowMatrix( sc, inner)));
+
+        System.out.println("===");
+        System.out.println("inner: "+Arrays.toString(inner.toArray()));
+        System.out.println("mul: "+Arrays.toString(multiply.toArray()));
+
+    }
+
+    public static DenseMatrix plus(DenseMatrix matrix, DenseMatrix other) {
+        double[] array = matrix.toArray();
+        double[] oArray = other.toArray();
+
+        final int len = array.length;
+        double[] res = new double[len];
+
+        for (int i = 0; i < len; ++i) {
+            res[i] = array[i] + oArray[i];
+        }
+
+        return new DenseMatrix(matrix.numRows(), matrix.numCols(), res);
     }
 
     /**
      * double[] => RowMatrix
-     *
      */
     public static void rawData2RowMatrix() throws EngineException {
         SparkConf conf = new SparkConf().setAppName("test").setMaster("local");
@@ -202,8 +225,8 @@ def computeInverse(X: RowMatrix): DenseMatrix = {
         sc.setLogLevel("WARN");
 
         List<Vector> list = new ArrayList<>();
-        Vector vector0 = new DenseVector(new double[]{1,2}); // row0
-        Vector vector1 = new DenseVector(new double[]{4,5}); // row1
+        Vector vector0 = new DenseVector(new double[]{1, 2}); // row0
+        Vector vector1 = new DenseVector(new double[]{4, 5}); // row1
         list.add(vector0);
         list.add(vector1);
 
@@ -213,7 +236,6 @@ def computeInverse(X: RowMatrix): DenseMatrix = {
         System.out.println(Arrays.toString(denseMatrix.toArray()));
 
     }
-
 
 
     /**
