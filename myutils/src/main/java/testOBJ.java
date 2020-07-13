@@ -7,6 +7,14 @@ import java.util.List;
  */
 public class testOBJ {
     public static void main(String[] args) {
+        System.out.println(5 & 2); // 101 & 10 = 0
+        System.out.println(4 & 2); // 100 & 10 = 0
+        System.out.println(3 & 2); // 11 & 10 = 10 = 2
+        System.out.println(5 & 1); // 101 & 1 = 1
+
+
+        System.exit(0);
+
         List<String> list = new ArrayList<>();
         list.add("aaa");
         System.out.println(list);
