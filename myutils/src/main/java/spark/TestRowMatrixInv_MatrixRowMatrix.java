@@ -83,25 +83,30 @@ def computeInverse(X: RowMatrix): DenseMatrix = {
         DenseMatrix invS = DenseMatrix.diag(new DenseVector(array));
 
         // U can not be a RowMatrix
-        JavaRDD<double[]> javaRDD = svd.U().rows().toJavaRDD().flatMap(new FlatMapFunction<Vector, double[]>() {
-            private static final long serialVersionUID = 1L;
+//        JavaRDD<double[]> javaRDD = svd.U().rows().toJavaRDD().flatMap(new FlatMapFunction<Vector, double[]>() {
+//            private static final long serialVersionUID = 1L;
+//
+//            @Override
+//            public Iterator<double[]> call(Vector vector) throws Exception {
+//                List<double[]> results = new ArrayList<>();
+//
+//                results.add(vector.toArray());
+//                return results.iterator();
+//            }
+//        });
+        final RowMatrix u = svd.U();
+        List<Vector> collect = u.rows().toJavaRDD().collect();
+        System.out.println("list size: "+collect.size());
+        System.out.println("lise[0] size: "+collect.get(0).size());
 
-            @Override
-            public Iterator<double[]> call(Vector vector) throws Exception {
-                List<double[]> results = new ArrayList<>();
+//        List<double[]> collect = javaRDD.collect();
 
-                results.add(vector.toArray());
-                return results.iterator();
-            }
-        });
-        List<double[]> collect = javaRDD.collect();
-
-        final int nRows = (int) svd.U().numRows();
-        final int nCols = (int) svd.U().numCols();
+        final int nRows = (int) u.numRows();
+        final int nCols = (int) u.numCols();
         double[] Uarray = new double[nRows * nCoef];
         for (int i = 0, len = collect.size(); i < len; ++i) {
-            double[] doubles = collect.get(i);
-            System.arraycopy(doubles, 0, Uarray, i * len, len);
+            Vector doubles = collect.get(i);
+            System.arraycopy(doubles.toArray(), 0, Uarray, i * len, len);
         }
 
         DenseMatrix U = new DenseMatrix(nRows, nCols, Uarray); // row/col major ???
@@ -194,11 +199,16 @@ def computeInverse(X: RowMatrix): DenseMatrix = {
                                 Hmat.multiply(Pmat).multiply(Hmat.transpose()), Rmat
                         );
 
-        DenseMatrix multiply = Pmat.multiply(Hmat.transpose()).multiply(computeInv(matrix2RowMatrix( sc, inner)));
+        DenseMatrix multiply = Pmat.multiply(Hmat.transpose()).multiply(computeInv(matrix2RowMatrix( sc, inner))); // inv
 
         System.out.println("===");
         System.out.println("inner: "+Arrays.toString(inner.toArray()));
         System.out.println("mul: "+Arrays.toString(multiply.toArray()));
+
+        /*
+        inner: [31.800000000000004, 46.2, 51.0, 72.0]
+        mul: [-0.22522522522551114, -0.38738738738788747, 0.2567567567569524, 0.4549549549552978]
+         */
 
     }
 
@@ -255,7 +265,14 @@ def computeInverse(X: RowMatrix): DenseMatrix = {
     }
 
     public static RowMatrix matrix2RowMatrix(JavaSparkContext sc, Matrix matrix) {
-        JavaRDD<Vector> parallelize = matrix2RDD(sc, matrix);
+        scala.collection.Iterator<Vector> rowIter = matrix.rowIter();
+        List<Vector> list = new ArrayList<>();
+        while (rowIter.hasNext()) {
+            Vector next = rowIter.next();
+            list.add(Vectors.dense(next.toArray()));
+        }
+
+        JavaRDD<Vector> parallelize = sc.parallelize(list);
         return new RowMatrix(parallelize.rdd());
     }
 
