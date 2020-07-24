@@ -24,6 +24,13 @@
 
     <dependencies>
 
+        <!-- jexl: java expression language -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-jexl3</artifactId>
+            <version>3.0</version>
+        </dependency>
+
         <!-- jblas -->
         <dependency>
             <groupId>org.jblas</groupId>
