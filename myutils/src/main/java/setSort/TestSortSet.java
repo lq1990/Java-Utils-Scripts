@@ -1,11 +1,6 @@
 package setSort;
 
-import scala.actors.threadpool.Arrays;
-
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * linked hashset: 按照 插入的顺序 维护顺序。
