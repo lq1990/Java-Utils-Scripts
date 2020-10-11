@@ -24,6 +24,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
         <!-- jexl: java expression language -->
         <dependency>
             <groupId>org.apache.commons</groupId>
