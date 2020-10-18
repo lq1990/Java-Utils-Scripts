@@ -45,16 +45,19 @@ public class ChiSqTest01 {
         // chisq
         ChiSqSelector chiSqSelector = new ChiSqSelector()
 //                .setNumTopFeatures(2)
-//                .setSelectorType("percentile")// numTopFeatures as default, percentile, fpr, fdr, fwe
-//                .setPercentile(0.5)
+                .setSelectorType("percentile")// numTopFeatures as default, percentile, fpr, fdr, fwe
+                .setPercentile(0.5)
 //                .setSelectorType("fpr").setFpr(0.3)
 //                .setSelectorType("fdr").setFdr(0.4)
-                .setSelectorType("fwe").setFwe(1)
+//                .setSelectorType("fwe").setFwe(0)
                 .setFeaturesCol("features")
-                .setLabelCol("label")
-                .setOutputCol("selected");
+                .setLabelCol("label");
+//                .setOutputCol("selected");
 
         ChiSqSelectorModel model = chiSqSelector.fit(df);
+        int[] ints = model.selectedFeatures();// 0-based index of features
+        System.out.println(Arrays.toString(ints));
+
         Dataset<Row> transform = model.transform(df);
         transform.show();
 

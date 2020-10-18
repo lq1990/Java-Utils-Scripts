@@ -8,6 +8,9 @@ import java.util.Arrays;
  */
 public class S01 {
     public static void main(String[] args) {
+        System.out.println(Boolean.TRUE.equals(null));
+        System.exit(0);
+
         double[] arr1 = new double[5];
         double[] arr2 = new double[5];
 
