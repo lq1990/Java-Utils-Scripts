@@ -7,8 +7,8 @@
 //import com.exceeddata.ac.common.evaluate.expression.ExpressionBuilder;
 //import com.exceeddata.ac.common.exception.EngineException;
 //import com.exceeddata.ac.common.util.signal.Fir1Helper;
-//import com.exceeddata.ac.spark.core.function.PartitionFunction;
-//import com.exceeddata.ac.spark.core.impl.ImplEnums;
+//import com.exceeddata.ac.hadoop_mr_spark.spark.core.function.PartitionFunction;
+//import com.exceeddata.ac.hadoop_mr_spark.spark.core.impl.ImplEnums;
 //import scala.Tuple2;
 //
 //import java.util.ArrayList;

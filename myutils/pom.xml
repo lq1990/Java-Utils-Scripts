@@ -178,8 +178,8 @@
 <!--            <version>1.2.12</version>-->
 <!--        </dependency>-->
 <!--        <dependency>-->
-<!--            <groupId>com.google.collections</groupId>-->
-<!--            <artifactId>google-collections</artifactId>-->
+<!--            <groupId>com.google.basic.collections</groupId>-->
+<!--            <artifactId>google-basic.collections</artifactId>-->
 <!--            <version>1.0</version>-->
 <!--        </dependency>-->
 

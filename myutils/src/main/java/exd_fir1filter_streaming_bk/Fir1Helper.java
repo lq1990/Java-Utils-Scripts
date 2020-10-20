@@ -113,8 +113,8 @@ public class Fir1Helper implements Serializable {
     /**
      * filter(), but the output needs to shifts and the shifted size is order/2.
      * <p>
-     * advantage: fast and get output in real time
-     * disadvan.: results of real time are actually not right, need to shift; the last #taps/2 value are not accurate even after shifting.
+     * advantage: fast and get output in real basic.time
+     * disadvan.: results of real basic.time are actually not right, need to shift; the last #taps/2 value are not accurate even after shifting.
      */
     public double filter(final double input) {
         double output = 0d;
@@ -161,7 +161,7 @@ public class Fir1Helper implements Serializable {
 
     /**
      * as matlab.filter(weights, 1, reals)
-     * use difference equation to filter input in time domain.
+     * use difference equation to filter input in basic.time test.domain.
      *
      * @param reals   data array with only real value, the imaginary parts are all 0.
      * @param weights the final filter weights

@@ -34,7 +34,7 @@ public class TestJexl01 {
         jc.set("pi", Math.PI);
 
         JexlEngine jexlEngine = new JexlBuilder().create();
-        JexlExpression e = jexlEngine.createExpression("math:cos(pi)");
+        JexlExpression e = jexlEngine.createExpression("math0.math:cos(pi)");
         Object res = e.evaluate(jc);
         System.out.println(res);
 
