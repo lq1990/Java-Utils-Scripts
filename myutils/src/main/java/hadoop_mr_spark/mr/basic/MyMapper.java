@@ -1,4 +1,4 @@
-package hadoop_mr_spark.mr;
+package hadoop_mr_spark.mr.basic;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;

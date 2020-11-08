@@ -1,18 +1,12 @@
-package hadoop_mr_spark.mr;
+package hadoop_mr_spark.mr.basic;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 /**
  * client
@@ -29,7 +23,6 @@ public class WCTest01 {
         Configuration conf = new Configuration(true);
 //        conf.addResource(new URL("hdfs://192.168.101.123:8020"));
 //        FileSystem fs = FileSystem.get(new URI("hdfs://192.168.101.123:8020"), conf);
-
 
         // create a new job
         Job job = Job.getInstance(conf);
@@ -53,6 +46,8 @@ public class WCTest01 {
         job.setMapOutputValueClass(IntWritable.class);
 
         job.setReducerClass(MyReducer.class);
+
+//        job.setPartitionerClass(tmp.class);
 
 
         // submit the job, then poll for progress until the job is complete
