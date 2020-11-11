@@ -34,6 +34,11 @@ public class MyMapper extends Mapper<Object, Text, Text, IntWritable> {
         while (iter.hasMoreTokens()) {
             word.set(iter.nextToken());
             context.write(word, one);
+            // hello 1
+            // a     1
+            // hello 1
+            // b     1
+
             // blocked, and serialize the k-v to array.
             // so word can be only one instance, and set()
         }
