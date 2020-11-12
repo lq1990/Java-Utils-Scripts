@@ -51,10 +51,10 @@ public class WeatherClient {
         // === reduce end =================================================
 
         // inout
-        Path input = new Path("/root/exceeddata/code/my/myjava/myutils/src/test/resources/mr/input");
+        Path input = new Path("/data/in/"); // path in hdfs
         FileInputFormat.addInputPath(job, input);
 
-        Path output = new Path("/root/exceeddata/code/my/myjava/myutils/src/test/resources/mr/output");
+        Path output = new Path("/data/out/");
         FileOutputFormat.setOutputPath(job, output);
 
         // reduce tasks
