@@ -65,4 +65,20 @@ public class MyFOF {
 
     }
 
+    /* output of reduce:
+
+    cat:hadoop	2
+cat:hello	2
+cat:mr	1
+cat:world	1
+hadoop:hello	3
+hadoop:mr	1
+hive:tom	3
+mr:tom	1
+mr:world	2
+tom:world	2
+     */
+
+    // new work: use the output of reduce, find top 2 fof of each person
+
 }

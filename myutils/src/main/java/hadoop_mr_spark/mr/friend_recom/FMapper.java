@@ -9,6 +9,10 @@ import org.apache.hadoop.util.StringUtils;
 import java.io.IOException;
 
 /**
+ * out:
+ *  text: p1:p2
+ *  int:  0|1
+ *
  * @author liuqiang
  * @since 2020-11-12 20:38
  */

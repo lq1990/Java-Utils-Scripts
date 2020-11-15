@@ -33,7 +33,7 @@ public class WeatherClient {
         // map, output, value
         job.setMapOutputValueClass(IntWritable.class);
         // map, output, partition
-        job.setPartitionerClass(TPartitioner.class);
+//        job.setPartitionerClass(TPartitioner.class);
         // map, sorter
         job.setSortComparatorClass(TSortComparator.class); // sort comparator
         // map, combiner
