@@ -1,4 +1,4 @@
-package practices.mr;
+package practices.mr.fof;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -36,5 +36,31 @@ public class FPReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
             rval.set(sum);
             context.write(rkey, rval);
         }
+
+         /*
+         cat:hadoop	2
+        cat:hello	2
+        cat:mr	1
+        cat:world	1
+        hadoop:hello	3
+        hadoop:mr	1
+        hive:tom	3
+        mr:tom	1
+        mr:world	2
+        tom:world	2
+         */
+
+
     }
+
+    private void addEntryAndStoreTop2(final Text rkeyin, final int sum, final Context context) {
+        // split rkeyin, e.g. split cat:hadoop
+
+
+        // write: rkeyout: rvalout
+        // cat: hadoop,hello;   hadoop: hello,cat
+
+    }
+
+
 }

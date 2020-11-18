@@ -1,4 +1,4 @@
-package practices.mr;
+package practices.mr.fof;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -9,15 +9,14 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 /**
-
- tom hello hadoop cat
- world hadoop hello hive
- cat tom hive
- mr hive hello
- hive cat hadoop world hello mr
- hadoop tom hive world
- hello tom world hive mr
-
+ * tom hello hadoop cat
+ * world hadoop hello hive
+ * cat tom hive
+ * mr hive hello
+ * hive cat hadoop world hello mr
+ * hadoop tom hive world
+ * hello tom world hive mr
+ *
  * @author liuqiang
  * @since 2020-11-15 10:39
  */
@@ -36,7 +35,7 @@ public class MyFOFPracClient {
          hello:hadoop 1
          hello:cat  1
          world:hadoop 0
-
+         hello:hadoop 1
          */
 
         job.setMapOutputKeyClass(Text.class);
@@ -55,9 +54,23 @@ public class MyFOFPracClient {
 
         Path output = new Path("/data/prac/fof/output");
         if (output.getFileSystem(conf).exists(output)) {
-            output.getFileSystem(conf).delete(output,true);
+            output.getFileSystem(conf).delete(output, true);
         }
         FileOutputFormat.setOutputPath(job, output);
+
+        /*
+         cat:hadoop	2
+        cat:hello	2
+        cat:mr	1
+        cat:world	1
+        hadoop:hello	3
+        hadoop:mr	1
+        hive:tom	3
+        mr:tom	1
+        mr:world	2
+        tom:world	2
+
+         */
 
         // wait
         job.waitForCompletion(true);
