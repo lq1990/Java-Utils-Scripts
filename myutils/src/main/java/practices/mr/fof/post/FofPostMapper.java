@@ -10,9 +10,9 @@ import java.io.IOException;
  * @author liuqiang
  * @since 2020-11-17 08:34
  */
-public class FofPostMapper extends Mapper<Object, Text, Text, Text> {
+public class FofPostMapper extends Mapper<Object, Text, FofPostEntity, Text> {
 
-    Text mkey = new Text();
+    FofPostEntity mkey = new FofPostEntity();
     Text mval = new Text();
 
     @Override
@@ -27,11 +27,11 @@ public class FofPostMapper extends Mapper<Object, Text, Text, Text> {
         String name1 = names[0];
         String name2 = names[1];
 
-        mkey.set(name1);
+        mkey.set(name1, name2, num);
         mval.set(name2+":"+num);
         context.write(mkey, mval);
 
-        mkey.set(name2);
+        mkey.set(name2, name1, num);
         mval.set(name1+":"+num);
         context.write(mkey, mval);
 

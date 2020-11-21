@@ -20,6 +20,10 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  *      mr:world	2
  *      tom:world	2
  *
+ * optimize:
+ *  sort in map,
+ *  take the first top2 in reduce
+ *
  * @author liuqiang
  * @since 2020-11-16 09:58
  */
@@ -33,10 +37,10 @@ public class FofPostClient {
 
         // map
         job.setMapperClass(FofPostMapper.class);
-        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputKeyClass(FofPostEntity.class);
         job.setMapOutputValueClass(Text.class);
 //        job.setPartitionerClass();
-        job.setSortComparatorClass(FofPostSortComparator.class);
+//        job.setSortComparatorClass(FofPostSortComparator.class); // trial, default map.key asc
 //        job.setCombinerClass();
 
 
@@ -49,8 +53,10 @@ public class FofPostClient {
          */
 
         // reduce
-//        job.setGroupingComparatorClass();
+        job.setGroupingComparatorClass(FofPostGroupingComparator.class);
         job.setReducerClass(FofPostReducer.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(Text.class);
 
         // in, out
         Path input = new Path("/data/fof/post/input");
