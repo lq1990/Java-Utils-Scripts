@@ -1,4 +1,4 @@
-package rabbitmq;
+package rabbitmq.basic_workqueue;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
@@ -30,12 +30,15 @@ public class Producer01 {
         // that means: we do not need to install many MQs, since we have many virtual hosts
         connectionFactory.setVirtualHost("/");
 
+        Connection connection = null;
+        Channel channel = null;
+
         try {
             // connect
-            Connection connection = connectionFactory.newConnection();
+            connection = connectionFactory.newConnection();
 
             // channel, producer -> mq through channel
-            Channel channel = connection.createChannel();
+            channel = connection.createChannel();
 
             // declare queue
             /*
@@ -67,6 +70,23 @@ public class Producer01 {
             e.printStackTrace();
         } finally {
             // close conn
+            // 1. close channel
+            if (channel != null) {
+                try {
+                    channel.close();
+                } catch (IOException | TimeoutException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
         }
 
 
