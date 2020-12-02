@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
+ * BuiltinExchangeType.DIRECT
+ *
+ *
  * @author liuqiang
  * @since 2020-12-01 20:05
  */
