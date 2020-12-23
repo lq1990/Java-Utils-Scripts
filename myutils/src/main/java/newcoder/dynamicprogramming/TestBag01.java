@@ -29,8 +29,8 @@ public class TestBag01 {
         // init f[][]
         int[][] f = new int[5][9];
 
-        for (int k = 1; k <= 4; ++k) {
-            for (int w = 1; w <= 8; ++w) {
+        for (int k = 1; k <= 4; ++k) { // k is itemIdx
+            for (int w = 1; w <= 8; ++w) { // w is spaceLeft
                 if (w >= spaces[k]) {
                     f[k][w] = Math.max(f[k - 1][w], f[k - 1][w - spaces[k]] + values[k]);
                 }
